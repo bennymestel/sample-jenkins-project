@@ -1,11 +1,17 @@
 pipeline {
-    agent { docker { image 'python:3.7.2' } }
+    agent any
     
     stages {
+        stage('Checkout SCM') {
+        	steps {
+        		checkout scm
+        	}
+        }	
         stage('Build') {
             steps {
                 echo "Starting the Build stage"
                 sh 'pip install -r requirements.txt'
+                sh 'docker build . -t app:latest'
             }
          }    
         stage('Test') {
@@ -22,6 +28,7 @@ pipeline {
         	}	
         	steps {
         		echo "Starting the Deploy stage"
+        		sh 'docker push app:latest'
         	} 
        }
    }    
