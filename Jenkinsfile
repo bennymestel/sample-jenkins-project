@@ -13,6 +13,12 @@ pipeline {
                 sh 'docker build . -t app:latest'
             }
          }    
+	stage('Run container'){
+		steps {
+			sh 'docker run -p 80:80 -d app:latest'
+			sh 'docker ps'
+		}
+	 }
         stage('Test') {
         	steps {
         		echo "Starting the Test stage"
