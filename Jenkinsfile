@@ -10,12 +10,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Starting the Build stage"
+		 sh 'chmod +x app.py'
                 sh 'docker build . -t app:latest'
             }
          }    
 	stage('Run container'){
 		steps {
-			sh 'docker run -p 80:80 -d app:latest'
+			sh 'docker run -p 80:80 -d app:latest '
 			sh 'docker ps'
 		}
 	 }
