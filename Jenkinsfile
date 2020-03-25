@@ -18,7 +18,7 @@ pipeline {
         		echo "Starting the Test stage"
         		sh 'python test.py'
         	}
-        }
+        } 
         stage('Deploy') {
         	when {
         		expression {
